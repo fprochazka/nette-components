@@ -32,6 +32,9 @@ class VisualPaginator extends Control
 	/** @var Paginator */
 	private $paginator;
 
+	/** @persistent */
+	public $page = 1;
+
 
 
 	/**
@@ -85,7 +88,7 @@ class VisualPaginator extends Control
 	public function loadState(array $params)
 	{
 		parent::loadState($params);
-		$this->getPaginator()->page = $this->getParam('page', 1);
+		$this->getPaginator()->page = $this->page;
 	}
 
 }

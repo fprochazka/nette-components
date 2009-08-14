@@ -11,7 +11,6 @@
  * @license    New BSD License
  * @link       http://extras.nettephp.com
  * @package    Nette Extras
- * @version    $Id$
  */
 
 

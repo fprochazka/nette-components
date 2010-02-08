@@ -13,9 +13,7 @@
  * @package    Nette Extras
  */
 
-/*namespace Nette\Forms;*/
-
-/*use Nette\Web\Html;*/
+/*use Nette\Web\Html, Nette\Forms\ConventionalRenderer, Nette\Forms\IFormControl, Nette\Forms\Checkbox, Nette\Forms\Button;*/
 
 
 
@@ -79,7 +77,7 @@ class ScaffoldingRenderer extends ConventionalRenderer
 			if (!($control instanceof IFormControl)) {
 				throw new /*\*/InvalidArgumentException("Argument must be array of IFormControl instances.");
 			}
-			$name = $control->lookupPath(/*Nette/Forms/*/'Form');
+			$name = $control->lookupPath('Nette\Forms\Form');
 			$s[] = $this->curlyBrackets ? "{!\$form['$name']->control}" : "<?php echo \$form['$name']->getControl() ?>";
 		}
 		$pair = $this->getWrapper('pair container');
@@ -103,7 +101,7 @@ class ScaffoldingRenderer extends ConventionalRenderer
 			return $head->setHtml('&nbsp;');
 
 		} else {
-			$name = $control->lookupPath(/*Nette/Forms/*/'Form');
+			$name = $control->lookupPath('Nette\Forms\Form');
 			return $head->setHtml(($this->curlyBrackets ? "{!\$form['$name']->label}" : "<?php echo \$form['$name']->getLabel() ?>") . $this->getValue('label suffix'));
 		}
 	}
@@ -135,7 +133,7 @@ class ScaffoldingRenderer extends ConventionalRenderer
 			$description .= $this->renderErrors($control);
 		}
 
-		$name = $control->lookupPath(/*Nette/Forms/*/'Form');
+		$name = $control->lookupPath('Nette\Forms\Form');
 		if ($control instanceof Checkbox || $control instanceof Button) {
 			return $body->setHtml(($this->curlyBrackets ? "{!\$form['$name']->control}{!\$form['$name']->label}" : "<?php echo \$form['$name']->getControl(), \$form['$name']->getLabel() ?>"). $description);
 

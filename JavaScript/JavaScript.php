@@ -5,11 +5,11 @@
  *
  * This source file is subject to the New BSD License.
  *
- * For more information please see http://extras.nettephp.com
+ * For more information please see http://addons.nette.org
  *
  * @copyright  Copyright (c) 2008, 2009 David Grudl
  * @license    New BSD License
- * @link       http://extras.nettephp.com
+ * @link       http://addons.nette.org
  * @package    Nette Extras
  */
 

@@ -79,6 +79,7 @@ class ScaffoldingRenderer extends ConventionalRenderer
 			if (!($control instanceof IFormControl)) {
 				throw new /*\*/InvalidArgumentException("Argument must be array of IFormControl instances.");
 			}
+			$control->setOption('rendered', TRUE);
 			$name = $control->lookupPath('Nette\Forms\Form');
 			$s[] = $this->latte ? "{\$form['$name']->control}" : "<?php echo \$form['$name']->control ?>";
 		}
@@ -135,6 +136,7 @@ class ScaffoldingRenderer extends ConventionalRenderer
 			$description .= $this->renderErrors($control);
 		}
 
+		$control->setOption('rendered', TRUE);
 		$name = $control->lookupPath('Nette\Forms\Form');
 		if ($control instanceof Checkbox || $control instanceof Button) {
 			return $body->setHtml(($this->latte ? "{\$form['$name']->control}{\$form['$name']->label}" : "<?php echo \$form['$name']->control, \$form['$name']->label ?>"). $description);

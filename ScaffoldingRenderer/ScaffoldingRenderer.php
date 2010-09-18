@@ -1,19 +1,21 @@
 <?php
 
 /**
- * Nette Framework Extras
+ * Scaffolding Renderer.
+ *
+ * Copyright (c) 2004, 2009 David Grudl (http://davidgrudl.com)
  *
  * This source file is subject to the New BSD License.
+ * For more information please see http://addons.nettephp.com/scaffoldingrenderer
  *
- * For more information please see http://extras.nettephp.com
- *
- * @copyright  Copyright (c) 2008, 2009 David Grudl
- * @license    New BSD License
- * @link       http://extras.nettephp.com
- * @package    Nette Extras
+ * @package    Nette Addons
  */
 
-/*use Nette\Web\Html, Nette\Forms\ConventionalRenderer, Nette\Forms\IFormControl, Nette\Forms\Checkbox, Nette\Forms\Button;*/
+use Nette\Web\Html,
+	Nette\Forms\ConventionalRenderer,
+	Nette\Forms\IFormControl,
+	Nette\Forms\Checkbox,
+	Nette\Forms\Button;
 
 
 
@@ -27,7 +29,7 @@
 class ScaffoldingRenderer extends ConventionalRenderer
 {
 	/** @var bool */
-	public $curlyBrackets;
+	public $latte = TRUE;
 
 
 
@@ -37,7 +39,7 @@ class ScaffoldingRenderer extends ConventionalRenderer
 	 */
 	public function renderBegin()
 	{
-		return $this->curlyBrackets ? "\n{!\$form->render('begin')}\n" : "\n<?php \$form->render('begin') ?>\n";
+		return $this->latte ? "\n{\$form->render('begin')}\n" : "\n<?php \$form->render('begin') ?>\n";
 	}
 
 
@@ -48,7 +50,7 @@ class ScaffoldingRenderer extends ConventionalRenderer
 	 */
 	public function renderEnd()
 	{
-		return $this->curlyBrackets ? "\n{!\$form->render('end')}\n" : "\n<?php \$form->render('end') ?>\n";
+		return $this->latte ? "\n{\$form->render('end')}\n" : "\n<?php \$form->render('end') ?>\n";
 	}
 
 
@@ -60,7 +62,7 @@ class ScaffoldingRenderer extends ConventionalRenderer
 	 */
 	public function renderErrors(IFormControl $control = NULL)
 	{
-		return $this->curlyBrackets ? "\n{!\$form->render('errors')}\n" : "\n<?php \$form->render('errors') ?>\n";
+		return $this->latte ? "\n{\$form->render('errors')}\n" : "\n<?php \$form->render('errors') ?>\n";
 	}
 
 
@@ -78,7 +80,7 @@ class ScaffoldingRenderer extends ConventionalRenderer
 				throw new /*\*/InvalidArgumentException("Argument must be array of IFormControl instances.");
 			}
 			$name = $control->lookupPath('Nette\Forms\Form');
-			$s[] = $this->curlyBrackets ? "{!\$form['$name']->control}" : "<?php echo \$form['$name']->getControl() ?>";
+			$s[] = $this->latte ? "{\$form['$name']->control}" : "<?php echo \$form['$name']->control ?>";
 		}
 		$pair = $this->getWrapper('pair container');
 		$pair->add($this->getWrapper('label container')->setHtml('&nbsp;'));
@@ -102,7 +104,7 @@ class ScaffoldingRenderer extends ConventionalRenderer
 
 		} else {
 			$name = $control->lookupPath('Nette\Forms\Form');
-			return $head->setHtml(($this->curlyBrackets ? "{!\$form['$name']->label}" : "<?php echo \$form['$name']->getLabel() ?>") . $this->getValue('label suffix'));
+			return $head->setHtml(($this->latte ? "{\$form['$name']->label}" : "<?php echo \$form['$name']->label ?>") . $this->getValue('label suffix'));
 		}
 	}
 
@@ -135,10 +137,10 @@ class ScaffoldingRenderer extends ConventionalRenderer
 
 		$name = $control->lookupPath('Nette\Forms\Form');
 		if ($control instanceof Checkbox || $control instanceof Button) {
-			return $body->setHtml(($this->curlyBrackets ? "{!\$form['$name']->control}{!\$form['$name']->label}" : "<?php echo \$form['$name']->getControl(), \$form['$name']->getLabel() ?>"). $description);
+			return $body->setHtml(($this->latte ? "{\$form['$name']->control}{\$form['$name']->label}" : "<?php echo \$form['$name']->control, \$form['$name']->label ?>"). $description);
 
 		} else {
-			return $body->setHtml(($this->curlyBrackets ? "{!\$form['$name']->control}" : "<?php echo \$form['$name']->getControl() ?>"). $description);
+			return $body->setHtml(($this->latte ? "{\$form['$name']->control}" : "<?php echo \$form['$name']->control ?>"). $description);
 		}
 	}
 

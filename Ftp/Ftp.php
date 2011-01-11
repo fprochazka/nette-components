@@ -93,7 +93,7 @@ class Ftp extends Nette\Object
 		}
 
 
-		Nette\Tools::tryError();
+		Nette\Debug::tryError();
 
 		if ($func === 'ftp_connect' || $func === 'ftp_ssl_connect') {
 			$this->state = array($name => $args);
@@ -101,7 +101,7 @@ class Ftp extends Nette\Object
 			$res = NULL;
 
 		} elseif (!is_resource($this->resource)) {
-			Nette\Tools::catchError($msg);
+			Nette\Debug::catchError($msg);
 			throw new FtpException("Not connected to FTP server. Call connect() or ssl_connect() first.");
 
 		} else {
@@ -117,7 +117,7 @@ class Ftp extends Nette\Object
 			}
 		}
 
-		if (Nette\Tools::catchError($msg) && !$silent) {
+		if (Nette\Debug::catchError($msg) && !$silent) {
 			throw new FtpException($msg);
 		}
 

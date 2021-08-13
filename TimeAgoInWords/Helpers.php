@@ -51,7 +51,6 @@ class Helpers
 			if ($delta < 45) return 'za ' . $delta . ' ' . self::plural($delta, 'minuta', 'minuty', 'minut');
 			if ($delta < 90) return 'za hodinu';
 			if ($delta < 1440) return 'za ' . round($delta / 60) . ' ' . self::plural(round($delta / 60), 'hodina', 'hodiny', 'hodin');
-			if ($delta < 2880) return 'zítra';
 			if ($delta < 43200) return 'za ' . round($delta / 1440) . ' ' . self::plural(round($delta / 1440), 'den', 'dny', 'dní');
 			if ($delta < 86400) return 'za měsíc';
 			if ($delta < 525960) return 'za ' . round($delta / 43200) . ' ' . self::plural(round($delta / 43200), 'měsíc', 'měsíce', 'měsíců');
@@ -65,7 +64,6 @@ class Helpers
 		if ($delta < 45) return "před $delta minutami";
 		if ($delta < 90) return 'před hodinou';
 		if ($delta < 1440) return 'před ' . round($delta / 60) . ' hodinami';
-		if ($delta < 2880) return 'včera';
 		if ($delta < 43200) return 'před ' . round($delta / 1440) . ' dny';
 		if ($delta < 86400) return 'před měsícem';
 		if ($delta < 525960) return 'před ' . round($delta / 43200) . ' měsíci';
